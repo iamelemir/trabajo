@@ -1,0 +1,38 @@
+#panel {
+    float: left;
+    width: 80%;
+    height: 550px;
+}
+
+#lateral {
+    float: left;
+    width: 20%;
+    height: 550px;
+}
+
+#central {
+    background: rgb(251, 251, 251);
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    display: block;
+    margin-top: 90px;
+    padding: 5px;
+}
+
+#box {
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+#box label {
+    width: 230px;
+    height: 80px;
+    font-size: 30px;
+    color: rgb(169, 169, 169);
+    padding-top: 0px;
+}

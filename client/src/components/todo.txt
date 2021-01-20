@@ -1,0 +1,327 @@
+<div class="row">
+          <div class="col-md-12">
+            <div class="well well-sm">
+              <form 
+                class="form-horizontal" 
+                action="/colegios"
+                method="post"
+                onSubmit={this.handleSubmit}>
+                <fieldset>
+                  <legend class="text-center header">Registrar Escuela</legend>
+
+                  <div class="form-group">
+                    <div class="col-md-10">
+                      <div class="col-md-8">
+                        <input
+                          id="nit"
+                          type="text"
+                          placeholder="NIT DE LA INSTITUCIÓN"
+                          class="form-control"
+                          name="nit"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div class="col-md-12">
+                        <input
+                          id="nombre"
+                          type="text"
+                          placeholder="NOMBRE DE LA INSTITUCIÓN"
+                          class="form-control"
+                          name="nombre"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div class="col-md-8">
+                        <input
+                          id="direccion"
+                          type="text"
+                          placeholder="DIRECCIÓN"
+                          class="form-control"
+                          name="direccion"
+                          onChange={this.handleInputChange}
+                          required
+                          
+                        />
+                      </div>
+                      <div class="col-md-8">
+                        <input
+                          id="telefono"
+                          type="text"
+                          placeholder="TELÉFONO"
+                          class="form-control"
+                          name="telefono"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div class="col-md-12">
+                        <input
+                          id="fname"
+                          name="director"
+                          type="text"
+                          placeholder="NOMBRE DEL DIRECTOR"
+                          class="form-control"
+                          name="director"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div class="col-md-10">
+                        <input
+                          id="email"
+                          type="email"
+                          placeholder="EMAIL"
+                          class="form-control"
+                          name="email"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div class="col-md-8">
+                        <input
+                          id="password"
+                          type="password"
+                          placeholder="CONTRASEÑA"
+                          class="form-control"
+                          name="password"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div class="col-md-8">
+                        <input
+                          id="password"
+                          type="password"
+                          placeholder="REPETIR CONTRASEÑA"
+                          class="form-control"
+                          name="password"
+                          onChange={this.handleInputChange}
+                          required
+                        />
+                      </div>
+                      <div class="col-md-8">
+                      <label htmlFor="">
+                        <input type="checkbox" name="" id="" />
+                      <span>    Acepto términos y condiciones!!!</span>
+                      </label>
+                       </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-10 text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                          Aceptar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        ---------------------------------------------------------------------
+         onSubmit={(values, { setSubmitting }) => {
+              const timeOut = setTimeout(() => {
+                console.log(values);
+                setSubmitting(false);
+                clearTimeout(timeOut);
+              }, 1000);
+            }}
+        -----------------------------
+         onSubmit={(values, { setSubmitting }) => {
+                const timeOut = setTimeout(() => {
+                console.log(values);
+                setSubmitting(false);
+                clearTimeout(timeOut);
+              }, 1000);
+            }}
+        -----------------
+        
+
+            async handleSubmit (values, {resetForm, setErrors, setSubmitting}){
+              const {nit,nombre,direccion,telefono,director,email,password, password2 } = values;
+              const school = await axios.post("http://localhost:9000/colegios", {
+                nit,nombre,direccion,telefono,director,email,password, password2
+              });
+              resetForm();
+              setSubmitting(false);
+            }
+        ---------------
+
+        <form
+            action="/colegios"
+            method="post"
+            className="registro"
+            onSubmit={this.handleSubmit}
+            class="col-md-12"
+          >
+            
+              <div class="input-group">
+                <FileBinaryIcon size={30} />
+                <input
+                class="form-control"
+                  type="text"
+                  placeholder="Nit Institucional"
+                  size="sm"
+                  name="nit"
+                  onChange={this.handleInputChange}
+                  required
+                  
+                />
+              </div>
+            
+            
+              <div class="input-group">
+                <HomeFillIcon size={30} />
+                <input
+                class="form-control"
+                  type="text"
+                  placeholder="Nombre de la Institución"
+                  size="sm"
+                  name="nombre"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div class="input-group">
+                <TagIcon size={30} />
+                <input
+                  class="form-control"
+                  size="sm"
+                  type="text"
+                  placeholder="Direccion"
+                  name="direccion"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div class="input-group">
+                <PaperAirplaneIcon size={30} />
+                <input
+                class="form-control"
+                  size="sm"
+                  type="text"
+                  placeholder="Número de Telefono"
+                  name="telefono"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div class="input-group">
+                <PeopleIcon size={30} />
+                <input
+                class="form-control"
+                  size="sm"
+                  type="text"
+                  placeholder="Nombre del Director"
+                  name="director"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div class="input-group">
+                <MailIcon size={30} />
+                <input
+                class="form-control"
+                  size="sm"
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div class="input-group">
+                <UnlockIcon size={30} />
+                <input
+                class="form-control"
+                  size="sm"
+                  type="password"
+                  placeholder="Contraseña"
+                  name="password"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div class="input-group">
+                <UnlockIcon size={30} />
+                <input
+                class="form-control"
+                  size="sm"
+                  type="password"
+                  placeholder="Repetir Contrasena"
+                  name="password2"
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+               <div class="input-group">
+                <Form className="Control">
+                  <input type="checkbox" name="aceptar" id="aceptar" />
+                  <span> Acepto términos y condiciones!!!</span>
+                </Form>
+              </div> 
+              <button type="submit" class="btn btn-success btn-lg">
+                Registrar
+              </button>
+            
+          </form>
+
+          ññññ
+          /* 
+    constructor(props) {
+    super(props);
+
+    this.state = {
+      nit: "",
+      nombre: "",
+      direccion: "",
+      telefono: "",
+      director: "",
+      email: "",
+      password: "",
+      password2: "",
+    };
+  }
+
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+   handleSubmit = (e) => {
+    e.preventDefault(); 
+
+    const {
+      nit,
+      nombre,
+      direccion,
+      telefono,
+      director,
+      email,
+      password,
+      password2,
+    } = this.state;
+
+    const school = {
+      nit,
+      nombre,
+      direccion,
+      telefono,
+      director,
+      email,
+      password,
+      password2,
+    };
+
+    axios
+      .post("http://localhost:9000/colegios", school)
+      .then(() => console.log("School created successfully"))
+      .catch((err) => {
+        console.error(err);
+      });
+  }; */ 

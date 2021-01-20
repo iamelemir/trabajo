@@ -1,0 +1,79 @@
+const pool = require("../../database/db");
+
+exports.login = async (req, res) => {
+    
+      const {rol, email, password } = req.params;
+      if(rol == 'estudiante'){
+        try {
+            const login = await pool.query(
+              "SELECT * FROM estudiante WHERE email = $1 and password = $2", [email, password]);
+              res.json(login.rows);
+              /* res.render('/administrador'); */
+          } catch (err) {
+            console.error(err.message);
+          }
+      }else if(rol == 'colegio'){
+        try {
+            const login = await pool.query(
+              "SELECT * FROM colegio WHERE email = $1 and password = $2", [email, password]);
+              res.json(login.rows);
+          } catch (err) {
+            console.error(err.message);
+          }
+      }else{
+          console.log(err, "No existe esta direccion");
+      }
+  };
+
+
+
+  #######################################3
+  const LocalStrategy = require('passport-local').Strategy;
+const pool = require('../../database/db');
+const bcrypt = require('bcryptjs')
+
+
+exports.login = async function(req,res){
+        try {
+            const email= req.body.email;
+            const password = req.body.password;
+            const rol = req.body.rol;
+        
+            if(rol == 'estudiante'){
+                try {
+                    const login = await pool.query(
+                      "SELECT * FROM estudiante WHERE email = $1 and password = $2", [email, password]);
+                      if (login.rowCount > 0) {
+                          console.log('EMAIL Y PASSWORD CORRECTOS')
+                          
+                      }else{
+                          console.log('DATOS INCORRECTOS')
+                      }
+                      res.json(login.rows);
+                     
+                  } catch (err) {
+                      
+                    console.error(err.message);
+                  }
+              }else if(rol == 'colegio'){
+                try {
+                    const login = await pool.query(
+                      "SELECT * FROM colegio WHERE email = $1 and password = $2", [email, password]);
+                      if (login.rowCount > 0) {
+                        console.log('EMAIL Y PASSWORD CORRECTOS')
+                        
+                    }else{
+                        console.log('DATOS INCORRECTOS')
+                    }
+                    res.json(login.rows);
+                  } catch (err) {
+                    console.error(err.message);
+                    
+                  }
+              }else{
+                  console.log(err.message);
+              }
+    } catch (err) {
+        
+    }
+  }

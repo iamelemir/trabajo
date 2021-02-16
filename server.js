@@ -81,8 +81,8 @@ app.delete('/curso/:id', course.deleteCourse)
 app.get('/historial/:id', history.historyId)
 app.get('/historial_id/:id', history.captureHistory)
 /* app.get('/historial/:id', history.allHistorials); */
-
-/* Notas */
+/* 16 */
+/* No de febrero del 201tas */
 app.get("/notas/:id_historial", notas.note);
 app.post("/nota/:id", notas.insertNote);
 

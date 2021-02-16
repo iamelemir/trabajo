@@ -35,7 +35,8 @@ obtener el id del curso por medio del indice del grado y numeral del grupo
   /* const students = [...estudiantes.rows]
       console.log(students)
       res.json(students) */
-
+/* 
+elemir */
   handleSubmit(event) {
     event.preventDefault();
     axios
@@ -45,20 +46,15 @@ obtener el id del curso por medio del indice del grado y numeral del grupo
       .then((response) => {
         const cursoID = response.data;
         this.setState({ cursoID });
-        //console.log(cursoID)
-         
+        console.log(cursoID)
         this.state.historial.push([cursoID.map(x => x.id)])
-        //this.state.dates.id.push(cursoID.map( x => x.id))     
-        //console.log(this.state.dates.id)/* lograr que este length sea mayor a uno dependiendo dle vedadero valor del array */
-       //console.log('Historiales IDS ' + this.state.historial)
-       //this.setState.historial([this.state.historial = []])
       })
       .catch((error) => {
         console.log(error);
       });
   }
 /* el estado no se actualiza hasta no presioinar el boton Agregar Notas */
-/* se debe cambiar el yhis.state.historial , pr el de cursoID, quien es el que trae ls datos ahora desde el servidor */
+/* se debe cambiar el ygit his.state.historial , pr el de cursoID, quien es el que trae ls datos ahora desde el servidor */
   historiales(){
     const numeros = [];
     numeros.push(this.state.historial)

@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -12,19 +12,20 @@ import { Formik, Field} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-export default class Login extends Component {
+export default class LoginDate extends Component {
 
   constructor(props){
     super(props);
     this.state = {id:''}
     this.state = {rol: ''}
     this.state.validate = false
-  }
-
+    
+}
   render() {
+
     return (
       <div>
-     <Formik
+        <Formik
           initialValues={{
             rol: "",
             email: "",
@@ -39,8 +40,8 @@ export default class Login extends Component {
               .required("Se necesita una contraseña"),
           })}
           onSubmit={(values, { setSubmitting, resetForm }) => {
-            
-            const timeOut = setTimeout(() => {
+        
+              const timeOut = setTimeout(() => {
               console.log("Datos del Login", values);
               console.log('mi rol es', this.state.rol)
               console.log('mi id es', this.state.id)
@@ -53,22 +54,24 @@ export default class Login extends Component {
               .then((response) => {
                 console.log(response)
                 const id = response.data.id
-                this.setState({ id });
                 if(id){
                     this.setState({rol : values.rol})
                 }else{
 
                 }
+                this.setState({ id });
                 console.log('@@@@@@@@@@@@@@@@', this.state.id)
                 this.setState({validate : true})
                
               console.log('el estado de validacion',this.state.validate)
+  
                  })
               .catch((err) => {
                 console.error(err);
               });
-              
+                    
             resetForm({ values: "" });
+            
           }}
         >
           {({
@@ -84,11 +87,13 @@ export default class Login extends Component {
             handleBlur
           }) => {
             return (
+                
               <Navbar bg="light" expand="lg">
                 <Navbar.Brand>PEV</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="mr-auto"></Nav>
+                  
                   <Form inline method="post" onSubmit={handleSubmit}>
                     <div>
 
@@ -131,14 +136,14 @@ export default class Login extends Component {
                       )}
                     </div>
 
-                     <Button
+                    <Button
                       name='aceptar'
                       type="submit"
                       variant="outline-success"
                       avilable={!valid || isSubmitting}
-                    >
+                          >
                       Iniciar Sesión
-                    </Button> 
+                    </Button>
                   </Form>
                 </Navbar.Collapse>
               </Navbar>
@@ -152,8 +157,9 @@ export default class Login extends Component {
           <Link to="/estudiante"></Link>
           <Route path="/admin" component={Admin}></Route>
           <Route path="/estudiante" component={Student}></Route>
-        </BrowserRouter> 
+        </BrowserRouter>
       </div>
     );
+        
   }
 }

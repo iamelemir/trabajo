@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const pool = require("./database/db");
 /*######################################### */
-const passport = require('passport')
 /* ######################################## */
 
 const school = require("./backend/controllers/schools");
@@ -33,8 +32,9 @@ app.use(express.json());
 
 
 /* logins */
-
 app.post("/login", login.login);
+
+
 /*  */
 
 /* All methods related to schools */

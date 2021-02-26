@@ -8,8 +8,6 @@ export default class Admin extends Component {
       <div>
         <Barra/>
       </div>
-        
-        
       </div>
     );
   }

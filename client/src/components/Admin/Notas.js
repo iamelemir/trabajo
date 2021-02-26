@@ -58,7 +58,7 @@ elemir */
   historiales(){
     const numeros = [];
     numeros.push(this.state.historial)
-    this.state.historial = [];
+    //this.state.historial = [];
     //console.log('estos son: ' + numeros.length)
       for (let i = 0; i < numeros.length; i++) {
         //const element = numeros[i]
@@ -83,7 +83,7 @@ elemir */
   }
 
   render() {
-    const { cursoID, dates, historial} = this.state;
+    /* const { cursoID, dates, historial} = this.state; */
 
     const style = {
       width: 1300,

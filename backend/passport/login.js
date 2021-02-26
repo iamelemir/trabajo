@@ -4,10 +4,7 @@ const bcrypt = require('bcryptjs')
 
 exports.login = async function(req,res){
         try {
-            const rol = req.body.rol;
-            const email= req.body.email;
-            const password = req.body.password;
-        
+            const {rol, email, password} = req.body;        
             if(rol == 'estudiante'){
                 try {
                     const login = await pool.query("SELECT * FROM estudiante WHERE email = $1 ", [email]);
@@ -16,9 +13,11 @@ exports.login = async function(req,res){
                           //console.log(login)
                           const compare = await bcrypt.compare(password, login.rows[0].password)
                           if (compare) {
+                            const id = await pool.query("SELECT id FROM estudiante WHERE email = $1 ", [email]);
                               res.send({
                                   "code":200,
-                                  "success": "Login Correcto"
+                                  "success": "Login Correcto",
+                                  "id": id.rows[0].id
                               })
                           }else{
                             res.send({
@@ -29,7 +28,7 @@ exports.login = async function(req,res){
                       }else{
                           console.log('DATOS INCORRECTOS')
                       }
-                      res.json(login.rows);
+                      res.json(id.rows);
                     } catch (err) {
                     console.error(err.message);
                   }
@@ -41,11 +40,14 @@ exports.login = async function(req,res){
                         //console.log(login)
                         const compare = await bcrypt.compare(password, login.rows[0].password)
                         if (compare) {
+                            const id = await pool.query("SELECT id FROM colegio WHERE email = $1", [email]);
                             res.send({
                                 "code":200,
-                                "success": "Login Correcto"
+                                "success": "Login Correcto",
+                                "id": id.rows[0].id
                             })
-                            res.json('login verificado')
+                            console.log(id.rows)
+                            res.json( id.rows)
                         }else{
                           res.send({
                               "code":204,
@@ -55,7 +57,7 @@ exports.login = async function(req,res){
                     }else{
                         console.log('DATOS INCORRECTOS')
                     }
-                    res.json(login.rows);
+                    res.json( id.rows);
                   } catch (err) {
                     console.error(err.message);
                   }

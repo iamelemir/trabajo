@@ -1,15 +1,16 @@
-import React, {useState} from "react";
+import React  from "react";
 import "./assets/css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Login from "./components/Login"
 
-import Home from "./components/Home"
+
 class App extends React.Component {
 
   render() {
    return (
      <div>
-        <Home/>
+        <Login/>
      </div>
    );
  

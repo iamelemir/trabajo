@@ -6,9 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Carrusel from "./Carrusel"
 import Footer from "./Footer"
 import RegisterSchool from "./RegisterSchool" 
-import Login from './Login'
 
-import LoginDate from './LoginDate'
 
 class Home extends Component {
 
@@ -16,14 +14,13 @@ class Home extends Component {
 
     return (
       <div>
-        <Login/>
-        <div className="container">
+          <div className="container">
           <RegisterSchool/>
           <Carrusel/>
         </div>
         <div>
           <Footer/>
-        </div>
+        </div> 
       </div>
     );
   }

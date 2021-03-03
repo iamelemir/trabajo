@@ -8,6 +8,7 @@ import Admin from "../components/Admin/Admin";
 import Student from "../components/Student/Student";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
+
 import { Formik, Field} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -22,7 +23,6 @@ export default class LoginDate extends Component {
     
 }
   render() {
-
     return (
       <div>
         <Formik
@@ -136,7 +136,7 @@ export default class LoginDate extends Component {
                       )}
                     </div>
 
-                    <Button
+                     <Button
                       name='aceptar'
                       type="submit"
                       variant="outline-success"

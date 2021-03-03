@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs')
 
 exports.login = async function(req,res){
         try {
-            const {rol, email, password} = req.body;        
+            const {rol, email, password} = req.body;     
+            console.log(req.body)   
             if(rol == 'estudiante'){
                 try {
                     const login = await pool.query("SELECT * FROM estudiante WHERE email = $1 ", [email]);
@@ -13,7 +14,7 @@ exports.login = async function(req,res){
                           //console.log(login)
                           const compare = await bcrypt.compare(password, login.rows[0].password)
                           if (compare) {
-                            const id = await pool.query("SELECT id FROM estudiante WHERE email = $1 ", [email]);
+                            const id = await pool.query("SELECT id from estudiante WHERE email = $1 ", [email]);
                               res.send({
                                   "code":200,
                                   "success": "Login Correcto",
@@ -26,6 +27,9 @@ exports.login = async function(req,res){
                            })
                           }
                       }else{
+                          res.send({
+                            message:"Email o Paaaword Erroneos"
+                          })
                           console.log('DATOS INCORRECTOS')
                       }
                       res.json(id.rows);

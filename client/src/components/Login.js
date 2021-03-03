@@ -6,25 +6,28 @@ import Form from "react-bootstrap/Form";
 
 import Admin from "../components/Admin/Admin";
 import Student from "../components/Student/Student";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+
+
+import Home from "./Home"
 
 import { Formik, Field} from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-export default class Login extends Component {
+export default class LoginDate extends Component {
 
   constructor(props){
     super(props);
     this.state = {id:''}
     this.state = {rol: ''}
     this.state.validate = false
-  }
-
+    
+}
   render() {
-    return (
-      <div>
-     <Formik
+    if(!this.state.validate){
+      return(
+        <div>
+        <Formik
           initialValues={{
             rol: "",
             email: "",
@@ -39,12 +42,8 @@ export default class Login extends Component {
               .required("Se necesita una contraseña"),
           })}
           onSubmit={(values, { setSubmitting, resetForm }) => {
-            
-            const timeOut = setTimeout(() => {
-              console.log("Datos del Login", values);
-              console.log('mi rol es', this.state.rol)
-              console.log('mi id es', this.state.id)
-              console.log(this.state.validate)
+        
+              const timeOut = setTimeout(() => {
               setSubmitting(false);
               clearTimeout(timeOut);
             }, 1000);            
@@ -53,22 +52,22 @@ export default class Login extends Component {
               .then((response) => {
                 console.log(response)
                 const id = response.data.id
-                this.setState({ id });
                 if(id){
                     this.setState({rol : values.rol})
+                    this.setState({ id });
+                    this.setState({validate : true})
                 }else{
-
-                }
-                console.log('@@@@@@@@@@@@@@@@', this.state.id)
-                this.setState({validate : true})
-               
-              console.log('el estado de validacion',this.state.validate)
+                    console.log('No hay Ususrio')
+                } 
+                
+ 
                  })
               .catch((err) => {
                 console.error(err);
               });
-              
+                    
             resetForm({ values: "" });
+            
           }}
         >
           {({
@@ -84,11 +83,13 @@ export default class Login extends Component {
             handleBlur
           }) => {
             return (
+                
               <Navbar bg="light" expand="lg">
                 <Navbar.Brand>PEV</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="mr-auto"></Nav>
+                  
                   <Form inline method="post" onSubmit={handleSubmit}>
                     <div>
 
@@ -136,9 +137,9 @@ export default class Login extends Component {
                       type="submit"
                       variant="outline-success"
                       avilable={!valid || isSubmitting}
-                    >
+                          >
                       Iniciar Sesión
-                    </Button> 
+                    </Button>
                   </Form>
                 </Navbar.Collapse>
               </Navbar>
@@ -147,13 +148,25 @@ export default class Login extends Component {
           }}
            
         </Formik>
-        <BrowserRouter>
-          <Link to="/admin"></Link>
-          <Link to="/estudiante"></Link>
-          <Route path="/admin" component={Admin}></Route>
-          <Route path="/estudiante" component={Student}></Route>
-        </BrowserRouter> 
-      </div>
-    );
+        <Home/>
+        </div>
+      )
+    }else{
+        if(this.state.rol === 'colegio'){
+          return (
+            <div>
+              <Admin/>
+          </div>
+          )
+        } else if(this.state.rol === 'estudiante'){
+          return(
+            <div>
+              <Student/>
+            </div>
+          )
+        }
+      
+    }
+        
   }
 }
